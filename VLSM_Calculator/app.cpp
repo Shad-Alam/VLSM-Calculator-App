@@ -13,3 +13,11 @@ App::~App()
     delete ui;
 }
 
+void App::on_pushButton_clicked()
+{
+    //QString name = ui->lineEdit->text();
+
+    //ui->lb_name->setText(name);
+
+   // QMesssageBox::information(this, "title here", "Hello Shad")
+}
