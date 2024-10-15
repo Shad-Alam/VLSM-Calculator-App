@@ -1,29 +1,22 @@
 #ifndef CALCULATION_H
 #define CALCULATION_H
 
-#include <QAbstractItemModel>
+#include <QDialog>
 
-class calculation : public QAbstractItemModel
+namespace Ui {
+class calculation;
+}
+
+class calculation : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit calculation(QObject *parent = nullptr);
-
-    // Header:
-    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
-
-    // Basic functionality:
-    QModelIndex index(int row, int column,
-                      const QModelIndex &parent = QModelIndex()) const override;
-    QModelIndex parent(const QModelIndex &index) const override;
-
-    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
-    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
-
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    explicit calculation(QWidget *parent = nullptr);
+    ~calculation();
 
 private:
+    Ui::calculation *ui;
 };
 
 #endif // CALCULATION_H

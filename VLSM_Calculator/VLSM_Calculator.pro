@@ -18,16 +18,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     calculation.cpp \
     main.cpp \
-    app.cpp \
-    nill.cpp
+    app.cpp
 
 HEADERS += \
     app.h \
-    calculation.h \
-    nill.h
+    calculation.h
 
 FORMS += \
-    app.ui
+    app.ui \
+    calculation.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
