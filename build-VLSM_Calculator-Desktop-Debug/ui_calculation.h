@@ -12,29 +12,36 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
-#include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QTableView>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_calculation
 {
 public:
-    QDialogButtonBox *buttonBox;
+    QLabel *label;
+    QTableView *tableView;
+    QPushButton *expor;
 
     void setupUi(QDialog *calculation)
     {
         if (calculation->objectName().isEmpty())
             calculation->setObjectName(QString::fromUtf8("calculation"));
-        calculation->resize(400, 300);
-        buttonBox = new QDialogButtonBox(calculation);
-        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
-        buttonBox->setGeometry(QRect(30, 240, 341, 32));
-        buttonBox->setOrientation(Qt::Horizontal);
-        buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
+        calculation->resize(791, 578);
+        label = new QLabel(calculation);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setGeometry(QRect(10, 10, 531, 91));
+        tableView = new QTableView(calculation);
+        tableView->setObjectName(QString::fromUtf8("tableView"));
+        tableView->setGeometry(QRect(30, 90, 731, 401));
+        expor = new QPushButton(calculation);
+        expor->setObjectName(QString::fromUtf8("expor"));
+        expor->setGeometry(QRect(608, 34, 151, 41));
 
         retranslateUi(calculation);
-        QObject::connect(buttonBox, SIGNAL(accepted()), calculation, SLOT(accept()));
-        QObject::connect(buttonBox, SIGNAL(rejected()), calculation, SLOT(reject()));
 
         QMetaObject::connectSlotsByName(calculation);
     } // setupUi
@@ -42,6 +49,8 @@ public:
     void retranslateUi(QDialog *calculation)
     {
         calculation->setWindowTitle(QApplication::translate("calculation", "Dialog", nullptr));
+        label->setText(QApplication::translate("calculation", "Subnet Name, Network Address, Subnet Mask, IP Range, Broadcast Address", nullptr));
+        expor->setText(QApplication::translate("calculation", "Export CSV", nullptr));
     } // retranslateUi
 
 };

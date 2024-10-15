@@ -12,7 +12,7 @@ App::~App()
 {
     delete ui;
 }
-
+/**
 void App::on_pushButton_clicked()
 {
     //QString name = ui->lineEdit->text();
@@ -20,4 +20,12 @@ void App::on_pushButton_clicked()
     //ui->lb_name->setText(name);
 
    // QMesssageBox::information(this, "title here", "Hello Shad")
+}
+*/
+
+void App::on_btn_calculation_clicked()
+{
+    hide();
+    cal = new calculation(this);
+    cal->show();
 }

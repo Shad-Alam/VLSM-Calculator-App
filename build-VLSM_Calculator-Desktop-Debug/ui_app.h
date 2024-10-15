@@ -30,9 +30,9 @@ public:
     QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayout;
     QLabel *label;
-    QLineEdit *lineEdit;
-    QTextEdit *textEdit;
-    QPushButton *pushButton;
+    QLineEdit *tf_networkAddress;
+    QTextEdit *te_hosts;
+    QPushButton *btn_calculation;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -54,15 +54,15 @@ public:
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(230, 30, 331, 31));
         label->setAlignment(Qt::AlignCenter);
-        lineEdit = new QLineEdit(centralwidget);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-        lineEdit->setGeometry(QRect(180, 110, 441, 41));
-        textEdit = new QTextEdit(centralwidget);
-        textEdit->setObjectName(QString::fromUtf8("textEdit"));
-        textEdit->setGeometry(QRect(180, 180, 441, 221));
-        pushButton = new QPushButton(centralwidget);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(180, 420, 151, 31));
+        tf_networkAddress = new QLineEdit(centralwidget);
+        tf_networkAddress->setObjectName(QString::fromUtf8("tf_networkAddress"));
+        tf_networkAddress->setGeometry(QRect(180, 110, 441, 41));
+        te_hosts = new QTextEdit(centralwidget);
+        te_hosts->setObjectName(QString::fromUtf8("te_hosts"));
+        te_hosts->setGeometry(QRect(180, 180, 441, 221));
+        btn_calculation = new QPushButton(centralwidget);
+        btn_calculation->setObjectName(QString::fromUtf8("btn_calculation"));
+        btn_calculation->setGeometry(QRect(180, 420, 151, 31));
         App->setCentralWidget(centralwidget);
         menubar = new QMenuBar(App);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -81,10 +81,10 @@ public:
     {
         App->setWindowTitle(QApplication::translate("App", "App", nullptr));
         label->setText(QApplication::translate("App", "VLSM Calculator", nullptr));
-        lineEdit->setText(QString());
-        lineEdit->setPlaceholderText(QApplication::translate("App", "Network Address ( for example : 192.168.1.0/24)", nullptr));
-        textEdit->setPlaceholderText(QApplication::translate("App", "Enter title & number of host ( for example : marketing 43)", nullptr));
-        pushButton->setText(QApplication::translate("App", "Calculate", nullptr));
+        tf_networkAddress->setText(QString());
+        tf_networkAddress->setPlaceholderText(QApplication::translate("App", "Network Address ( for example : 192.168.1.0/24)", nullptr));
+        te_hosts->setPlaceholderText(QApplication::translate("App", "Enter title & number of host ( for example : marketing 43)", nullptr));
+        btn_calculation->setText(QApplication::translate("App", "Calculate", nullptr));
     } // retranslateUi
 
 };

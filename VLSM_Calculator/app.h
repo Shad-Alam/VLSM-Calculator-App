@@ -2,6 +2,7 @@
 #define APP_H
 
 #include <QMainWindow>
+#include <calculation.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class App; }
@@ -16,9 +17,10 @@ public:
     ~App();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_btn_calculation_clicked();
 
 private:
     Ui::App *ui;
+    calculation *cal;
 };
 #endif // APP_H

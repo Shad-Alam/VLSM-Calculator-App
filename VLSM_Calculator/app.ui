@@ -45,7 +45,7 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="tf_networkAddress">
     <property name="geometry">
      <rect>
       <x>180</x>
@@ -61,7 +61,7 @@
      <string>Network Address ( for example : 192.168.1.0/24)</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit">
+   <widget class="QTextEdit" name="te_hosts">
     <property name="geometry">
      <rect>
       <x>180</x>
@@ -74,7 +74,7 @@
      <string>Enter title &amp; number of host ( for example : marketing 43)</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="btn_calculation">
     <property name="geometry">
      <rect>
       <x>180</x>
