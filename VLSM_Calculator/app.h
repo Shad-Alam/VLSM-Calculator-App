@@ -2,11 +2,24 @@
 #define APP_H
 
 #include <QMainWindow>
-#include <calculation.h>
+#include <string>
+//#include <string.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class App; }
 QT_END_NAMESPACE
+
+struct Octet{
+    int first, second, third, fourth, mask;
+};
+
+struct Node{
+    int hosts;
+    std::string subnetMask;
+    int networkPortion;
+    int closestSubnetSize;
+    int bitCount;
+};
 
 class App : public QMainWindow
 {
@@ -19,8 +32,16 @@ public:
 private slots:
     void on_btn_calculation_clicked();
 
+    void on_btn_reset_clicked();
+
 private:
     Ui::App *ui;
-    calculation *cal;
+
+private:
+    std::string getMask(int n);
+    std::string getSubnetMask(int networkPortion);
+    Node calculateSubnetMask(int hosts);
+    int getInt(std::string ms);
+    Octet seperateNetadd(std::string netadd);
 };
 #endif // APP_H

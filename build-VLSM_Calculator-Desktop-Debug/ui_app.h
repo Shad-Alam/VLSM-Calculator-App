@@ -11,12 +11,14 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -33,6 +35,9 @@ public:
     QLineEdit *tf_networkAddress;
     QTextEdit *te_hosts;
     QPushButton *btn_calculation;
+    QTableWidget *tableWidget_Data;
+    QPushButton *btn_export_csv;
+    QPushButton *btn_reset;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -40,7 +45,7 @@ public:
     {
         if (App->objectName().isEmpty())
             App->setObjectName(QString::fromUtf8("App"));
-        App->resize(800, 600);
+        App->resize(1152, 651);
         centralwidget = new QWidget(App);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayoutWidget = new QWidget(centralwidget);
@@ -52,21 +57,55 @@ public:
         verticalLayout->setContentsMargins(0, 0, 0, 0);
         label = new QLabel(centralwidget);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(230, 30, 331, 31));
+        label->setGeometry(QRect(400, 10, 331, 31));
+        QFont font;
+        font.setPointSize(18);
+        font.setBold(true);
+        font.setItalic(true);
+        font.setUnderline(true);
+        font.setWeight(75);
+        label->setFont(font);
         label->setAlignment(Qt::AlignCenter);
         tf_networkAddress = new QLineEdit(centralwidget);
         tf_networkAddress->setObjectName(QString::fromUtf8("tf_networkAddress"));
-        tf_networkAddress->setGeometry(QRect(180, 110, 441, 41));
+        tf_networkAddress->setGeometry(QRect(10, 80, 381, 41));
         te_hosts = new QTextEdit(centralwidget);
         te_hosts->setObjectName(QString::fromUtf8("te_hosts"));
-        te_hosts->setGeometry(QRect(180, 180, 441, 221));
+        te_hosts->setGeometry(QRect(10, 140, 381, 421));
         btn_calculation = new QPushButton(centralwidget);
         btn_calculation->setObjectName(QString::fromUtf8("btn_calculation"));
-        btn_calculation->setGeometry(QRect(180, 420, 151, 31));
+        btn_calculation->setGeometry(QRect(240, 570, 151, 31));
+        QFont font1;
+        font1.setPointSize(13);
+        btn_calculation->setFont(font1);
+        tableWidget_Data = new QTableWidget(centralwidget);
+        if (tableWidget_Data->columnCount() < 5)
+            tableWidget_Data->setColumnCount(5);
+        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        tableWidget_Data->setHorizontalHeaderItem(0, __qtablewidgetitem);
+        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
+        tableWidget_Data->setHorizontalHeaderItem(1, __qtablewidgetitem1);
+        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+        tableWidget_Data->setHorizontalHeaderItem(2, __qtablewidgetitem2);
+        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
+        tableWidget_Data->setHorizontalHeaderItem(3, __qtablewidgetitem3);
+        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
+        tableWidget_Data->setHorizontalHeaderItem(4, __qtablewidgetitem4);
+        tableWidget_Data->setObjectName(QString::fromUtf8("tableWidget_Data"));
+        tableWidget_Data->setGeometry(QRect(410, 140, 731, 491));
+        tableWidget_Data->horizontalHeader()->setDefaultSectionSize(145);
+        btn_export_csv = new QPushButton(centralwidget);
+        btn_export_csv->setObjectName(QString::fromUtf8("btn_export_csv"));
+        btn_export_csv->setGeometry(QRect(970, 80, 161, 41));
+        btn_export_csv->setFont(font1);
+        btn_reset = new QPushButton(centralwidget);
+        btn_reset->setObjectName(QString::fromUtf8("btn_reset"));
+        btn_reset->setGeometry(QRect(80, 570, 151, 31));
+        btn_reset->setFont(font1);
         App->setCentralWidget(centralwidget);
         menubar = new QMenuBar(App);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 800, 22));
+        menubar->setGeometry(QRect(0, 0, 1152, 22));
         App->setMenuBar(menubar);
         statusbar = new QStatusBar(App);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -80,11 +119,23 @@ public:
     void retranslateUi(QMainWindow *App)
     {
         App->setWindowTitle(QApplication::translate("App", "App", nullptr));
-        label->setText(QApplication::translate("App", "VLSM Calculator", nullptr));
+        label->setText(QApplication::translate("App", "VLSM CALCULATOR", nullptr));
         tf_networkAddress->setText(QString());
         tf_networkAddress->setPlaceholderText(QApplication::translate("App", "Network Address ( for example : 192.168.1.0/24)", nullptr));
         te_hosts->setPlaceholderText(QApplication::translate("App", "Enter title & number of host ( for example : marketing 43)", nullptr));
         btn_calculation->setText(QApplication::translate("App", "Calculate", nullptr));
+        QTableWidgetItem *___qtablewidgetitem = tableWidget_Data->horizontalHeaderItem(0);
+        ___qtablewidgetitem->setText(QApplication::translate("App", "Subnet Name", nullptr));
+        QTableWidgetItem *___qtablewidgetitem1 = tableWidget_Data->horizontalHeaderItem(1);
+        ___qtablewidgetitem1->setText(QApplication::translate("App", "Network Address", nullptr));
+        QTableWidgetItem *___qtablewidgetitem2 = tableWidget_Data->horizontalHeaderItem(2);
+        ___qtablewidgetitem2->setText(QApplication::translate("App", "Subnet Mask", nullptr));
+        QTableWidgetItem *___qtablewidgetitem3 = tableWidget_Data->horizontalHeaderItem(3);
+        ___qtablewidgetitem3->setText(QApplication::translate("App", "IP Range", nullptr));
+        QTableWidgetItem *___qtablewidgetitem4 = tableWidget_Data->horizontalHeaderItem(4);
+        ___qtablewidgetitem4->setText(QApplication::translate("App", "Broadcast Address", nullptr));
+        btn_export_csv->setText(QApplication::translate("App", "Export CSV", nullptr));
+        btn_reset->setText(QApplication::translate("App", "Reset", nullptr));
     } // retranslateUi
 
 };

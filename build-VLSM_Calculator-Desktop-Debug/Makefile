@@ -52,15 +52,11 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../VLSM_Calculator/calculation.cpp \
-		../VLSM_Calculator/main.cpp \
-		../VLSM_Calculator/app.cpp moc_app.cpp \
-		moc_calculation.cpp
-OBJECTS       = calculation.o \
-		main.o \
+SOURCES       = ../VLSM_Calculator/main.cpp \
+		../VLSM_Calculator/app.cpp moc_app.cpp
+OBJECTS       = main.o \
 		app.o \
-		moc_app.o \
-		moc_calculation.o
+		moc_app.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -137,9 +133,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		../VLSM_Calculator/VLSM_Calculator.pro ../VLSM_Calculator/app.h \
-		../VLSM_Calculator/calculation.h ../VLSM_Calculator/calculation.cpp \
-		../VLSM_Calculator/main.cpp \
+		../VLSM_Calculator/VLSM_Calculator.pro ../VLSM_Calculator/app.h ../VLSM_Calculator/main.cpp \
 		../VLSM_Calculator/app.cpp
 QMAKE_TARGET  = VLSM_Calculator
 DESTDIR       = 
@@ -149,7 +143,7 @@ TARGET        = VLSM_Calculator
 first: all
 ####### Build rules
 
-VLSM_Calculator: ui_app.h ui_calculation.h $(OBJECTS)  
+VLSM_Calculator: ui_app.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../VLSM_Calculator/VLSM_Calculator.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -322,9 +316,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../VLSM_Calculator/app.h ../VLSM_Calculator/calculation.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../VLSM_Calculator/calculation.cpp ../VLSM_Calculator/main.cpp ../VLSM_Calculator/app.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../VLSM_Calculator/app.ui ../VLSM_Calculator/calculation.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../VLSM_Calculator/app.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../VLSM_Calculator/main.cpp ../VLSM_Calculator/app.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../VLSM_Calculator/app.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -356,33 +350,24 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_app.cpp moc_calculation.cpp
+compiler_moc_header_make_all: moc_app.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_app.cpp moc_calculation.cpp
+	-$(DEL_FILE) moc_app.cpp
 moc_app.cpp: ../VLSM_Calculator/app.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/asus/Documents/VLSM/VLSM-Calculator-App/build-VLSM_Calculator-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/asus/Documents/VLSM/VLSM-Calculator-App/VLSM_Calculator -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../VLSM_Calculator/app.h -o moc_app.cpp
 
-moc_calculation.cpp: ../VLSM_Calculator/calculation.h \
-		moc_predefs.h \
-		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/asus/Documents/VLSM/VLSM-Calculator-App/build-VLSM_Calculator-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/asus/Documents/VLSM/VLSM-Calculator-App/VLSM_Calculator -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../VLSM_Calculator/calculation.h -o moc_calculation.cpp
-
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_app.h ui_calculation.h
+compiler_uic_make_all: ui_app.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_app.h ui_calculation.h
+	-$(DEL_FILE) ui_app.h
 ui_app.h: ../VLSM_Calculator/app.ui \
 		/usr/lib/qt5/bin/uic
 	/usr/lib/qt5/bin/uic ../VLSM_Calculator/app.ui -o ui_app.h
-
-ui_calculation.h: ../VLSM_Calculator/calculation.ui \
-		/usr/lib/qt5/bin/uic
-	/usr/lib/qt5/bin/uic ../VLSM_Calculator/calculation.ui -o ui_calculation.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -394,10 +379,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 
 ####### Compile
 
-calculation.o: ../VLSM_Calculator/calculation.cpp ../VLSM_Calculator/calculation.h \
-		ui_calculation.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o calculation.o ../VLSM_Calculator/calculation.cpp
-
 main.o: ../VLSM_Calculator/main.cpp ../VLSM_Calculator/app.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../VLSM_Calculator/main.cpp
 
@@ -407,9 +388,6 @@ app.o: ../VLSM_Calculator/app.cpp ../VLSM_Calculator/app.h \
 
 moc_app.o: moc_app.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_app.o moc_app.cpp
-
-moc_calculation.o: moc_calculation.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_calculation.o moc_calculation.cpp
 
 ####### Install
 
