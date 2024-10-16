@@ -98,7 +98,7 @@ public:
         tableWidget_Data->setHorizontalHeaderItem(4, __qtablewidgetitem4);
         tableWidget_Data->setObjectName(QString::fromUtf8("tableWidget_Data"));
         tableWidget_Data->setGeometry(QRect(10, 220, 1521, 441));
-        tableWidget_Data->horizontalHeader()->setDefaultSectionSize(240);
+        tableWidget_Data->horizontalHeader()->setDefaultSectionSize(310);
         btn_reset = new QPushButton(centralwidget);
         btn_reset->setObjectName(QString::fromUtf8("btn_reset"));
         btn_reset->setGeometry(QRect(930, 110, 151, 31));

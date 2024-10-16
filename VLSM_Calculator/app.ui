@@ -114,7 +114,7 @@
      </rect>
     </property>
     <attribute name="horizontalHeaderDefaultSectionSize">
-     <number>240</number>
+     <number>310</number>
     </attribute>
     <column>
      <property name="text">

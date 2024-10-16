@@ -143,10 +143,12 @@ Octet App::seperateNetadd(std::string netadd){
 
 void App::on_btn_calculation_clicked()
 {
+    QString netaddress = ui->tf_networkAddress->text();
+    QString hostList = ui->te_hosts->toPlainText();
     // Provide network address
-    std::string netadd = "192.168.1.0/24";
+    std::string netadd = netaddress.toStdString();// "192.168.1.0/24";
 
-    netadd = "192.168.100.0/24";
+    //netadd = "192.168.100.0/24";
     //netadd = "10.0.0.0/8";
 
     // seperate net address and find default subnetMask
@@ -172,24 +174,12 @@ void App::on_btn_calculation_clicked()
         if(n4==0){
             port = true;
         }
-        //{1,{2,{3,{4,5}}}
-       // cout << endl << endl;
-       // cout << "Number of Host              :: " << s.hosts << endl;
-      //  cout << "Network Portion             :: " << s.networkPortion << endl;
-      //  cout << "Cloesest Subnet Size        :: " << s.closestSubnetSize << "(2^" << s.bitCount << ")" << endl;
-      //  cout << "Subnet Mask                 :: " << s.subnetMask << endl;
-
 
         std::string ip = std::to_string(oct.first) + "." + std::to_string(oct.second) + "." + std::to_string(oct.third) + "." + std::to_string(oct.fourth);
         ip+= "/" + std::to_string(s.networkPortion);
-        //std::cout << "Network address 	    :: " << ip << std::endl;
-
-            //netadd = ip;
-            //continue;
 
         std::string fip = std::to_string(n1) + "." + std::to_string(n2) + "." + std::to_string(n3) + "." + std::to_string(n4+1);
         s.closestSubnetSize--;
-
 
         int r4 = (n4+s.closestSubnetSize)%256;
         int r3 = (n4+s.closestSubnetSize)/256;
@@ -213,14 +203,11 @@ void App::on_btn_calculation_clicked()
         std::string broadcastAddress = "";
         broadcastAddress = std::to_string(n1) + "." + std::to_string(n2) + "." + std::to_string(n3) + "." + std::to_string(n4);
 
-        /////
         v.pb({std::to_string(a),{ip,{s.subnetMask,{fip + " to " + secip, broadcastAddress}}}});
 
         Octet newoc = seperateNetadd(broadcastAddress+"/"+std::to_string(s.networkPortion));
 
-
         n1 = newoc.first, n2 = newoc.second, n3 = newoc.third, n4 = newoc.fourth;
-
 
         if(n4+1<=255){
             n4++;
@@ -238,7 +225,6 @@ void App::on_btn_calculation_clicked()
                         n1++;
                     }else{
                         // invalid broadcast address
-                        //cout << "null" << endl;
                         port = true;
                     }
                 }
@@ -248,20 +234,8 @@ void App::on_btn_calculation_clicked()
         netadd = std::to_string(n1) + "." + std::to_string(n2) + "." + std::to_string(n3) + "." + std::to_string(n4);
         // update network address
         netadd+="/" + std::to_string(s.networkPortion);
-
-       // if(port){
-         //   ans = true;
-        //}
     }
 
-
-    //---------------------------------------
-    //QString netadd = ui->tf_networkAddress->text();
-    //QString hostList = ui->te_hosts->toPlainText();
-
-    //ui->tf_networkAddress->setText(hosts);
-   // ui->te_hosts->setText("Shad Joy");
-   // tf_networkAddress
 
     if(!ans){
         ui->tableWidget_Data->setRowCount(v.size());
