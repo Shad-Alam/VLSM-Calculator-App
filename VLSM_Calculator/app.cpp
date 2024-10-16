@@ -277,7 +277,7 @@ void App::on_btn_calculation_clicked()
    // ui->te_hosts->setText("Shad Joy");
    // tf_networkAddress
 
-    ui->tableWidget_Data->setRowCount(100);
+    ui->tableWidget_Data->setRowCount(v.size());
     for(int a=0; a<v.size(); a++){
         //{1,{2,{3,{4,5}}}
         ui->tableWidget_Data->setItem(a, 0, new QTableWidgetItem(QString::fromStdString(v[a].first)));
