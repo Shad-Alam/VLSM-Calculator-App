@@ -146,19 +146,20 @@ void App::on_btn_calculation_clicked()
     // Provide network address
     std::string netadd = "192.168.1.0/24";
 
-    //netadd = "192.168.100.0/24";
-    netadd = "10.0.0.0/8";
+    netadd = "192.168.100.0/24";
+    //netadd = "10.0.0.0/8";
 
     // seperate net address and find default subnetMask
     // find which type of IP address this is
 
-    //int hosts[] = {120, 60, 30, 25, 14, 10, 8, 4};
-    int hosts[] = {10000, 5000, 2000, 1000, 500, 200, 100, 50};
+    int hosts[] = {120, 60, 30, 25, 14, 10, 8, 4};
+    //int hosts[] = {10000, 5000, 2000, 1000, 500, 200, 100, 50};
     int n = sizeof(hosts)/sizeof(hosts[0]);
 
     std::sort(hosts, hosts+n);
     std::reverse(hosts, hosts+n);
 
+    bool ans = false;
     //{1,{2,{3,{4,5}}}
     std::vector<std::pair<std::string,std::pair<std::string, std::pair<std::string,std::pair<std::string,std::string>>>>> v;
     for(int a=0; a<n; a++){
@@ -206,56 +207,52 @@ void App::on_btn_calculation_clicked()
         if(n1>255){
             port = true;
         }
-            //cout << "fi == " << fip << endl;
 
-            std::string secip = std::to_string(n1) + "." + std::to_string(n2) + "." + std::to_string(n3) + "." + std::to_string(n4-1);
+        std::string secip = std::to_string(n1) + "." + std::to_string(n2) + "." + std::to_string(n3) + "." + std::to_string(n4-1);
 
-            //cout << "Sec == " << secip << endl;
-            std::string broadcastAddress = "";
+        std::string broadcastAddress = "";
+        broadcastAddress = std::to_string(n1) + "." + std::to_string(n2) + "." + std::to_string(n3) + "." + std::to_string(n4);
 
-            broadcastAddress = std::to_string(n1) + "." + std::to_string(n2) + "." + std::to_string(n3) + "." + std::to_string(n4);
+        /////
+        v.pb({std::to_string(a),{ip,{s.subnetMask,{fip + " to " + secip, broadcastAddress}}}});
 
-            //cout << n1 << " " << n2 << " " << n3 << " " << n4 << endl;
-
-            //std::cout << "Usable IP Range 	    :: " << fip << " to " << secip << std::endl;
-            //std::cout << "Broadcast address 	    :: " << broadcastAddress << std::endl;
-            v.pb({std::to_string(a),{ip,{s.subnetMask,{fip + "," + secip, broadcastAddress}}}});
+        Octet newoc = seperateNetadd(broadcastAddress+"/"+std::to_string(s.networkPortion));
 
 
-            Octet newoc = seperateNetadd(broadcastAddress+"/"+std::to_string(s.networkPortion));
+        n1 = newoc.first, n2 = newoc.second, n3 = newoc.third, n4 = newoc.fourth;
 
 
-            n1 = newoc.first, n2 = newoc.second, n3 = newoc.third, n4 = newoc.fourth;
-
-
-            if(n4+1<=255){
-                n4++;
+        if(n4+1<=255){
+            n4++;
+        }else{
+            n4 = 0;
+            if(n3+1<=255){
+                n3++;
             }else{
-                n4 = 0;
-                if(n3+1<=255){
-                    n3++;
+                n3 = 0;
+                if(n2+1<=255){
+                    n2++;
                 }else{
-                    n3 = 0;
-                    if(n2+1<=255){
-                        n2++;
+                    n2 = 0;
+                    if(n1+1<=255){
+                        n1++;
                     }else{
-                        n2 = 0;
-                        if(n1+1<=255){
-                            n1++;
-                        }else{
-                            // invalid broadcast address
-                            //cout << "null" << endl;
-                        }
+                        // invalid broadcast address
+                        //cout << "null" << endl;
+                        port = true;
                     }
                 }
             }
-
-            netadd = std::to_string(n1) + "." + std::to_string(n2) + "." + std::to_string(n3) + "." + std::to_string(n4);
-
-            netadd+="/" + std::to_string(s.networkPortion);
-
-            //cout::cout << netadd << std::endl;
         }
+
+        netadd = std::to_string(n1) + "." + std::to_string(n2) + "." + std::to_string(n3) + "." + std::to_string(n4);
+        // update network address
+        netadd+="/" + std::to_string(s.networkPortion);
+
+       // if(port){
+         //   ans = true;
+        //}
+    }
 
 
     //---------------------------------------
@@ -266,14 +263,18 @@ void App::on_btn_calculation_clicked()
    // ui->te_hosts->setText("Shad Joy");
    // tf_networkAddress
 
-    ui->tableWidget_Data->setRowCount(v.size());
-    for(int a=0; a<v.size(); a++){
-        //{1,{2,{3,{4,5}}}
-        ui->tableWidget_Data->setItem(a, 0, new QTableWidgetItem(QString::fromStdString(v[a].first)));
-        ui->tableWidget_Data->setItem(a, 1, new QTableWidgetItem(QString::fromStdString(v[a].second.first)));
-        ui->tableWidget_Data->setItem(a, 2, new QTableWidgetItem(QString::fromStdString(v[a].second.second.first)));
-        ui->tableWidget_Data->setItem(a, 3, new QTableWidgetItem(QString::fromStdString(v[a].second.second.second.first)));
-        ui->tableWidget_Data->setItem(a, 4, new QTableWidgetItem(QString::fromStdString(v[a].second.second.second.second)));
+    if(!ans){
+        ui->tableWidget_Data->setRowCount(v.size());
+        for(int a=0; a<v.size(); a++){
+            //{1,{2,{3,{4,5}}}
+            ui->tableWidget_Data->setItem(a, 0, new QTableWidgetItem(QString::fromStdString(v[a].first)));
+            ui->tableWidget_Data->setItem(a, 1, new QTableWidgetItem(QString::fromStdString(v[a].second.first)));
+            ui->tableWidget_Data->setItem(a, 2, new QTableWidgetItem(QString::fromStdString(v[a].second.second.first)));
+            ui->tableWidget_Data->setItem(a, 3, new QTableWidgetItem(QString::fromStdString(v[a].second.second.second.first)));
+            ui->tableWidget_Data->setItem(a, 4, new QTableWidgetItem(QString::fromStdString(v[a].second.second.second.second)));
+        }
+    }else{
+        // error message
     }
 }
 
