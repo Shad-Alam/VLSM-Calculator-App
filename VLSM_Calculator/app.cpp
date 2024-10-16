@@ -290,5 +290,7 @@ void App::on_btn_calculation_clicked()
 
 void App::on_btn_reset_clicked()
 {
-
+    ui->tableWidget_Data->clearContents();
+    ui->tf_networkAddress->setText("");
+    ui->te_hosts->setText("");
 }
