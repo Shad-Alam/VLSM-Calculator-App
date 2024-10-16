@@ -188,35 +188,24 @@ void App::on_btn_calculation_clicked()
 
         std::string fip = std::to_string(n1) + "." + std::to_string(n2) + "." + std::to_string(n3) + "." + std::to_string(n4+1);
         s.closestSubnetSize--;
-        while(s.closestSubnetSize>0){
-            if(n4+s.closestSubnetSize<=255){
-                n4+=s.closestSubnetSize;
-                    //break;
-            }else{
-                int d = n4+s.closestSubnetSize;
-                int dn = d-255;
-                n4 = 255; // 122 + 240
-                s.closestSubnetSize-=dn;
-                if(n3+1<=255){
-                    n3++;
-                }else{
-                    n3 = 0;
-                    if(n2+1<=255){
-                        n2++;
-                    }else{
-                        n2 = 0;
-                        if(n1+1<=255){
-                            n1++;
-                        }else{
-                                // error
-                            break;
-                        }
-                    }
-                }
-            }
-            //	break;
-        }
 
+
+        int r4 = (n4+s.closestSubnetSize)%256;
+        int r3 = (n4+s.closestSubnetSize)/256;
+        n4 = r4;
+
+        int r2 = (n3+r3)%256;
+        int r1 = (n3+r3)/256;
+        n3 = r2;
+
+        int rd1 = (n2+r1)%256;
+        int rd2 = (n2+r1)/256;
+        n2 = rd1;
+        n1 = (n1+rd2);
+
+        if(n1>255){
+            port = true;
+        }
             //cout << "fi == " << fip << endl;
 
             std::string secip = std::to_string(n1) + "." + std::to_string(n2) + "." + std::to_string(n3) + "." + std::to_string(n4-1);
