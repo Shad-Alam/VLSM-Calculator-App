@@ -5,6 +5,8 @@
 //#include "string"
 #include "bits/stdc++.h"
 
+#define pb push_back
+
 App::App(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::App)
@@ -138,27 +140,151 @@ Octet App::seperateNetadd(std::string netadd){
 
     return {oct[0], oct[1], oct[2], oct[3], sm};
 }
-//std::string getSubnetMask(int networkPortion);
-//Node calculateSubnetMask(int hosts);
-//int getInt(std::string ms);
-//Octet seperateNetadd(std::string netadd);
 
 void App::on_btn_calculation_clicked()
 {
-    QString netadd = ui->tf_networkAddress->text();
-    QString hosts = ui->te_hosts->toPlainText();
+    // Provide network address
+    std::string netadd = "192.168.1.0/24";
 
-    ui->tf_networkAddress->setText(hosts);
-   // ui->te_hosts->setText("Shad Alam Joy");
+    //netadd = "192.168.100.0/24";
+    netadd = "10.0.0.0/8";
+
+    // seperate net address and find default subnetMask
+    // find which type of IP address this is
+
+    //int hosts[] = {120, 60, 30, 25, 14, 10, 8, 4};
+    int hosts[] = {10000, 5000, 2000, 1000, 500, 200, 100, 50};
+    int n = sizeof(hosts)/sizeof(hosts[0]);
+
+    std::sort(hosts, hosts+n);
+    std::reverse(hosts, hosts+n);
+
+    //{1,{2,{3,{4,5}}}
+    std::vector<std::pair<std::string,std::pair<std::string, std::pair<std::string,std::pair<std::string,std::string>>>>> v;
+    for(int a=0; a<n; a++){
+        Octet oct = seperateNetadd(netadd);
+        int n1 = oct.first, n2 = oct.second, n3 = oct.third, n4 = oct.fourth;
+        Node s = calculateSubnetMask(hosts[a]);
+
+        bool port = false;
+
+        if(n4==0){
+            port = true;
+        }
+        //{1,{2,{3,{4,5}}}
+       // cout << endl << endl;
+       // cout << "Number of Host              :: " << s.hosts << endl;
+      //  cout << "Network Portion             :: " << s.networkPortion << endl;
+      //  cout << "Cloesest Subnet Size        :: " << s.closestSubnetSize << "(2^" << s.bitCount << ")" << endl;
+      //  cout << "Subnet Mask                 :: " << s.subnetMask << endl;
+
+
+        std::string ip = std::to_string(oct.first) + "." + std::to_string(oct.second) + "." + std::to_string(oct.third) + "." + std::to_string(oct.fourth);
+        ip+= "/" + std::to_string(s.networkPortion);
+        //std::cout << "Network address 	    :: " << ip << std::endl;
+
+            //netadd = ip;
+            //continue;
+
+        std::string fip = std::to_string(n1) + "." + std::to_string(n2) + "." + std::to_string(n3) + "." + std::to_string(n4+1);
+        s.closestSubnetSize--;
+        while(s.closestSubnetSize>0){
+            if(n4+s.closestSubnetSize<=255){
+                n4+=s.closestSubnetSize;
+                    //break;
+            }else{
+                int d = n4+s.closestSubnetSize;
+                int dn = d-255;
+                n4 = 255; // 122 + 240
+                s.closestSubnetSize-=dn;
+                if(n3+1<=255){
+                    n3++;
+                }else{
+                    n3 = 0;
+                    if(n2+1<=255){
+                        n2++;
+                    }else{
+                        n2 = 0;
+                        if(n1+1<=255){
+                            n1++;
+                        }else{
+                                // error
+                            break;
+                        }
+                    }
+                }
+            }
+            //	break;
+        }
+
+            //cout << "fi == " << fip << endl;
+
+            std::string secip = std::to_string(n1) + "." + std::to_string(n2) + "." + std::to_string(n3) + "." + std::to_string(n4-1);
+
+            //cout << "Sec == " << secip << endl;
+            std::string broadcastAddress = "";
+
+            broadcastAddress = std::to_string(n1) + "." + std::to_string(n2) + "." + std::to_string(n3) + "." + std::to_string(n4);
+
+            //cout << n1 << " " << n2 << " " << n3 << " " << n4 << endl;
+
+            //std::cout << "Usable IP Range 	    :: " << fip << " to " << secip << std::endl;
+            //std::cout << "Broadcast address 	    :: " << broadcastAddress << std::endl;
+            v.pb({std::to_string(a),{ip,{s.subnetMask,{fip + "," + secip, broadcastAddress}}}});
+
+
+            Octet newoc = seperateNetadd(broadcastAddress+"/"+std::to_string(s.networkPortion));
+
+
+            n1 = newoc.first, n2 = newoc.second, n3 = newoc.third, n4 = newoc.fourth;
+
+
+            if(n4+1<=255){
+                n4++;
+            }else{
+                n4 = 0;
+                if(n3+1<=255){
+                    n3++;
+                }else{
+                    n3 = 0;
+                    if(n2+1<=255){
+                        n2++;
+                    }else{
+                        n2 = 0;
+                        if(n1+1<=255){
+                            n1++;
+                        }else{
+                            // invalid broadcast address
+                            //cout << "null" << endl;
+                        }
+                    }
+                }
+            }
+
+            netadd = std::to_string(n1) + "." + std::to_string(n2) + "." + std::to_string(n3) + "." + std::to_string(n4);
+
+            netadd+="/" + std::to_string(s.networkPortion);
+
+            //cout::cout << netadd << std::endl;
+        }
+
+
+    //---------------------------------------
+    //QString netadd = ui->tf_networkAddress->text();
+    //QString hostList = ui->te_hosts->toPlainText();
+
+    //ui->tf_networkAddress->setText(hosts);
+   // ui->te_hosts->setText("Shad Joy");
    // tf_networkAddress
 
     ui->tableWidget_Data->setRowCount(100);
-    for(int a=0; a<10; a++){
-        ui->tableWidget_Data->setItem(a,0,new QTableWidgetItem(netadd));
-        ui->tableWidget_Data->setItem(a,1,new QTableWidgetItem(QString("Joy")));
-        ui->tableWidget_Data->setItem(a,2,new QTableWidgetItem(QString("Joy")));
-        ui->tableWidget_Data->setItem(a,3,new QTableWidgetItem(QString("Joy")));
-        ui->tableWidget_Data->setItem(a,4,new QTableWidgetItem(QString("Joy")));
+    for(int a=0; a<v.size(); a++){
+        //{1,{2,{3,{4,5}}}
+        ui->tableWidget_Data->setItem(a, 0, new QTableWidgetItem(QString::fromStdString(v[a].first)));
+        ui->tableWidget_Data->setItem(a, 1, new QTableWidgetItem(QString::fromStdString(v[a].second.first)));
+        ui->tableWidget_Data->setItem(a, 2, new QTableWidgetItem(QString::fromStdString(v[a].second.second.first)));
+        ui->tableWidget_Data->setItem(a, 3, new QTableWidgetItem(QString::fromStdString(v[a].second.second.second.first)));
+        ui->tableWidget_Data->setItem(a, 4, new QTableWidgetItem(QString::fromStdString(v[a].second.second.second.second)));
     }
 }
 
