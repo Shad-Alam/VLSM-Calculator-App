@@ -188,8 +188,6 @@ void App::on_btn_calculation_clicked()
         return x.second>y.second;
     });
 
-    //std::re
-
     int n = j.size();
 
     int hosts[n+1];
