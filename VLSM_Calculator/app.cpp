@@ -5,7 +5,7 @@
 //#include "string"
 #include "bits/stdc++.h"
 
-#define pb push_back
+#define pb  push_back
 
 App::App(QWidget *parent)
     : QMainWindow(parent)
@@ -147,6 +147,7 @@ void App::on_btn_calculation_clicked()
     QString hostList = ui->te_hosts->toPlainText();
     // Provide network address
     std::string netadd = netaddress.toStdString();// "192.168.1.0/24";
+    std::string s = hostList.toStdString();
 
     //netadd = "192.168.100.0/24";
     //netadd = "10.0.0.0/8";
@@ -154,12 +155,47 @@ void App::on_btn_calculation_clicked()
     // seperate net address and find default subnetMask
     // find which type of IP address this is
 
-    int hosts[] = {120, 60, 30, 25, 14, 10, 8, 4};
-    //int hosts[] = {10000, 5000, 2000, 1000, 500, 200, 100, 50};
-    int n = sizeof(hosts)/sizeof(hosts[0]);
+    std::vector<std::pair<std::string,int>> j;
 
-    std::sort(hosts, hosts+n);
-    std::reverse(hosts, hosts+n);
+    std::string sm = ""; int ahq = 0;
+    for(int a=0; a<s.size(); a++){
+        if((s[a]>='a' && s[a]<='z') || (s[a]>='A' && s[a]<='Z')){
+            sm+=s[a];
+        }else if(s[a]>='0' && s[a]<='9'){
+            std::stringstream ss; int nnn;
+            ss << s[a];
+            ss >> nnn;
+            ahq = (ahq*10) + nnn;
+        }else{
+            if(sm.size()>0 && ahq>0){
+                j.pb({sm, ahq});
+                sm = "", ahq = 0;
+            }
+
+            if(sm.size()>0 && ahq==0){
+                continue;
+            }
+
+            sm = "", ahq = 0;
+        }
+    }
+
+    if(sm.size()>0 && ahq>0){
+        j.pb({sm,ahq});
+    }
+
+    std::sort(j.begin(), j.end(),[&](std::pair<std::string,int> x,std::pair<std::string,int> y){
+        return x.second>y.second;
+    });
+
+    //std::re
+
+    int n = j.size();
+
+    int hosts[n+1];
+    for(int a=0; a<n; a++){
+        hosts[a] = j[a].second;
+    }
 
     bool ans = false;
     //{1,{2,{3,{4,5}}}
@@ -241,7 +277,7 @@ void App::on_btn_calculation_clicked()
         ui->tableWidget_Data->setRowCount(v.size());
         for(int a=0; a<v.size(); a++){
             //{1,{2,{3,{4,5}}}
-            ui->tableWidget_Data->setItem(a, 0, new QTableWidgetItem(QString::fromStdString(v[a].first)));
+            ui->tableWidget_Data->setItem(a, 0, new QTableWidgetItem(QString::fromStdString(j[a].first + " " + std::to_string(j[a].second)+" hosts")));
             ui->tableWidget_Data->setItem(a, 1, new QTableWidgetItem(QString::fromStdString(v[a].second.first)));
             ui->tableWidget_Data->setItem(a, 2, new QTableWidgetItem(QString::fromStdString(v[a].second.second.first)));
             ui->tableWidget_Data->setItem(a, 3, new QTableWidgetItem(QString::fromStdString(v[a].second.second.second.first)));
