@@ -47,5 +47,8 @@ private:
     Node calculateSubnetMask(int hosts);
     int getInt(std::string ms);
     Octet seperateNetadd(std::string netadd);
+
+private:
+    bool tableChecker;
 };
 #endif // APP_H

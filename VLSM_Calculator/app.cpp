@@ -10,6 +10,7 @@
 App::App(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::App)
+    , tableChecker(false)
 {
     ui->setupUi(this);
 
@@ -272,7 +273,9 @@ void App::on_btn_calculation_clicked()
     }
 
 
-    if(!ans){
+
+    if(v.size()>0){
+        tableChecker = true;
         ui->tableWidget_Data->setRowCount(v.size());
         for(int a=0; a<v.size(); a++){
             //{1,{2,{3,{4,5}}}
@@ -283,6 +286,7 @@ void App::on_btn_calculation_clicked()
             ui->tableWidget_Data->setItem(a, 4, new QTableWidgetItem(QString::fromStdString(v[a].second.second.second.second)));
         }
     }else{
+        tableChecker = false;
         // error message
     }
 }
@@ -294,15 +298,15 @@ void App::on_btn_reset_clicked()
     ui->tf_networkAddress->setText("");
     ui->te_hosts->setText("");
     ui->tableWidget_Data->setRowCount(0);
+    tableChecker = false;
 }
 
 
 void App::on_btn_export_csv_clicked()
-{/**
-    if(v.size()>=0){
+{
+    if(tableChecker){
         // export csv
     }else{
         // error message
     }
-   */
 }
