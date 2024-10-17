@@ -1,8 +1,8 @@
-## Project    : VLSM-Calculator-App
-## Language   : C, C++
-## Framework  : QT
-## Version    : 1.0.0.0
-## Contributor: Shad-Alam 
+### Project    : VLSM-Calculator-App
+### Language   : C, C++
+### Framework  : QT
+### Version    : 1.0.0.0
+### Contributor: Shad-Alam 
 
 <br/>
 
@@ -10,7 +10,7 @@
 
 - VLSM(Variable Length Subnet Mask) calculator based on IPv4. <br/>
 
-## Project presentation: https://youtu.be/RoqZqEDoa68
+### Project presentation: https://youtu.be/RoqZqEDoa68
 
 <br/> 
 
