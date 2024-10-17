@@ -26,7 +26,7 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_2">
-    <item row="1" column="0" colspan="2">
+    <item row="2" column="0" colspan="2">
      <widget class="QLineEdit" name="tf_networkAddress">
       <property name="font">
        <font>
@@ -58,7 +58,7 @@
       </property>
      </widget>
     </item>
-    <item row="3" column="0">
+    <item row="4" column="1">
      <widget class="QPushButton" name="btn_calculation">
       <property name="font">
        <font>
@@ -80,31 +80,7 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="0" colspan="2">
-     <widget class="QTextEdit" name="te_hosts">
-      <property name="font">
-       <font>
-        <pointsize>11</pointsize>
-        <weight>50</weight>
-        <italic>false</italic>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QTextEdit{
-	color: black;
-	background-color: white;
-   border: 1px solid black;
-   border-radius: 10px;
-   padding: 10px;
-}</string>
-      </property>
-      <property name="placeholderText">
-       <string>Enter title &amp; number of host ( for example : marketing 43)</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="2">
+    <item row="1" column="2">
      <widget class="QLabel" name="label">
       <property name="font">
        <font>
@@ -130,7 +106,29 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="2" rowspan="3">
+    <item row="4" column="0">
+     <widget class="QPushButton" name="btn_reset">
+      <property name="font">
+       <font>
+        <pointsize>-1</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+	background-color: blue;
+	color: white;
+    border-radius: 5px;
+	font-size: 17px;
+	padding: 5px;
+	margin: 5px;
+}</string>
+      </property>
+      <property name="text">
+       <string>Reset</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="2" rowspan="4">
      <widget class="QTableWidget" name="tableWidget_Data">
       <property name="maximumSize">
        <size>
@@ -236,25 +234,45 @@
       </column>
      </widget>
     </item>
-    <item row="3" column="1">
-     <widget class="QPushButton" name="btn_reset">
+    <item row="3" column="0" colspan="2">
+     <widget class="QTextEdit" name="te_hosts">
       <property name="font">
        <font>
-        <pointsize>-1</pointsize>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
        </font>
       </property>
       <property name="styleSheet">
+       <string notr="true">QTextEdit{
+	color: black;
+	background-color: white;
+   border: 1px solid black;
+   border-radius: 10px;
+   padding: 10px;
+}</string>
+      </property>
+      <property name="placeholderText">
+       <string>Enter title &amp; number of host ( for example : marketing 43)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QPushButton" name="btn_export_csv">
+      <property name="styleSheet">
        <string notr="true">QPushButton{
-	background-color: blue;
 	color: white;
-    border-radius: 5px;
+   background-color: #1d8348;
+   border-radius: 5px;
 	font-size: 17px;
 	padding: 5px;
-	margin: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
 }</string>
       </property>
       <property name="text">
-       <string>Reset</string>
+       <string>Export CSV</string>
       </property>
      </widget>
     </item>

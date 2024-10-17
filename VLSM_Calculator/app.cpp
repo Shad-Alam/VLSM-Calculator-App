@@ -287,9 +287,22 @@ void App::on_btn_calculation_clicked()
     }
 }
 
+// reset all
 void App::on_btn_reset_clicked()
 {
     ui->tableWidget_Data->clearContents();
     ui->tf_networkAddress->setText("");
     ui->te_hosts->setText("");
+    ui->tableWidget_Data->setRowCount(0);
+}
+
+
+void App::on_btn_export_csv_clicked()
+{/**
+    if(v.size()>=0){
+        // export csv
+    }else{
+        // error message
+    }
+   */
 }
