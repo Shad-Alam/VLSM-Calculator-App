@@ -87,7 +87,6 @@ Node App::calculateSubnetMask(int hosts){
 
     int networkPortion = 32-bitCount;
 
-
     std::string subnetMask = getSubnetMask(networkPortion);
 
     return {hosts, subnetMask, networkPortion, closestSubnetSize, bitCount};
