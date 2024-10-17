@@ -14,10 +14,10 @@
 
 <br/> 
 
-![ezcv logo](https://github.com/Shad-Alam/VLSM-Calculator-App/blob/main/screenshot/v1.jpg)
+![ezcv logo](https://github.com/Shad-Alam/VLSM-Calculator-App/blob/main/screenshot/d1.jpg)
 
 <br/>
 
-![ezcv logo](https://github.com/Shad-Alam/VLSM-Calculator-App/blob/main/screenshot/v2.jpg)
+![ezcv logo](https://github.com/Shad-Alam/VLSM-Calculator-App/blob/main/screenshot/d2.jpg)
 
 
