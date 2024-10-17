@@ -12,6 +12,8 @@ App::App(QWidget *parent)
     , ui(new Ui::App)
 {
     ui->setupUi(this);
+
+    ui->tableWidget_Data->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeMode::Stretch);
 }
 
 App::~App()
@@ -33,8 +35,7 @@ std::string App::getMask(int n){
         int sm = 0, p = 7;
         while(n>0){
             sm+=(1<<p);
-            p--;
-            n--;
+            p--, n--;
         }
 
         return {std::to_string(sm) + "."};

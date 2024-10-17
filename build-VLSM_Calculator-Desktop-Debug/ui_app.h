@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
@@ -20,7 +21,6 @@
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QTextEdit>
-#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -29,12 +29,11 @@ class Ui_App
 {
 public:
     QWidget *centralwidget;
-    QWidget *verticalLayoutWidget;
-    QVBoxLayout *verticalLayout;
-    QLabel *label;
+    QGridLayout *gridLayout_2;
     QLineEdit *tf_networkAddress;
-    QTextEdit *te_hosts;
     QPushButton *btn_calculation;
+    QTextEdit *te_hosts;
+    QLabel *label;
     QTableWidget *tableWidget_Data;
     QPushButton *btn_reset;
     QMenuBar *menubar;
@@ -44,40 +43,85 @@ public:
     {
         if (App->objectName().isEmpty())
             App->setObjectName(QString::fromUtf8("App"));
-        App->resize(1541, 692);
+        App->setWindowModality(Qt::WindowModal);
+        App->resize(1250, 779);
+        App->setStyleSheet(QString::fromUtf8("QWidget{\n"
+"	background-color: #9ABFDC;\n"
+"}"));
+        App->setTabShape(QTabWidget::Rounded);
         centralwidget = new QWidget(App);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        verticalLayoutWidget = new QWidget(centralwidget);
-        verticalLayoutWidget->setObjectName(QString::fromUtf8("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(10, 10, 2, 2));
-        verticalLayout = new QVBoxLayout(verticalLayoutWidget);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        verticalLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
-        verticalLayout->setContentsMargins(0, 0, 0, 0);
-        label = new QLabel(centralwidget);
-        label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(610, 20, 331, 31));
-        QFont font;
-        font.setPointSize(18);
-        font.setBold(true);
-        font.setItalic(true);
-        font.setUnderline(true);
-        font.setWeight(75);
-        label->setFont(font);
-        label->setAlignment(Qt::AlignCenter);
+        gridLayout_2 = new QGridLayout(centralwidget);
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         tf_networkAddress = new QLineEdit(centralwidget);
         tf_networkAddress->setObjectName(QString::fromUtf8("tf_networkAddress"));
-        tf_networkAddress->setGeometry(QRect(10, 70, 421, 131));
-        tf_networkAddress->setAlignment(Qt::AlignCenter);
-        te_hosts = new QTextEdit(centralwidget);
-        te_hosts->setObjectName(QString::fromUtf8("te_hosts"));
-        te_hosts->setGeometry(QRect(440, 70, 481, 131));
+        QFont font;
+        font.setPointSize(10);
+        font.setBold(false);
+        font.setWeight(50);
+        tf_networkAddress->setFont(font);
+        tf_networkAddress->setAutoFillBackground(false);
+        tf_networkAddress->setStyleSheet(QString::fromUtf8("QLineEdit{\n"
+"	color: black;\n"
+"	background-color: white;\n"
+"	border: 1px solid black;\n"
+"   border-radius: 10px;\n"
+"   padding: 12px;\n"
+"}"));
+        tf_networkAddress->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+
+        gridLayout_2->addWidget(tf_networkAddress, 1, 0, 1, 2);
+
         btn_calculation = new QPushButton(centralwidget);
         btn_calculation->setObjectName(QString::fromUtf8("btn_calculation"));
-        btn_calculation->setGeometry(QRect(930, 70, 151, 31));
         QFont font1;
-        font1.setPointSize(13);
         btn_calculation->setFont(font1);
+        btn_calculation->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"	background-color: rgb(239, 41, 41);\n"
+"	color: white;\n"
+"    border-radius: 5px;\n"
+"	font-size: 17px;\n"
+"	padding: 5px;\n"
+"	margin: 5px;\n"
+"}"));
+
+        gridLayout_2->addWidget(btn_calculation, 3, 0, 1, 1);
+
+        te_hosts = new QTextEdit(centralwidget);
+        te_hosts->setObjectName(QString::fromUtf8("te_hosts"));
+        QFont font2;
+        font2.setPointSize(11);
+        font2.setBold(false);
+        font2.setItalic(false);
+        font2.setWeight(50);
+        te_hosts->setFont(font2);
+        te_hosts->setStyleSheet(QString::fromUtf8("QTextEdit{\n"
+"	color: black;\n"
+"	background-color: white;\n"
+"   border: 1px solid black;\n"
+"   border-radius: 10px;\n"
+"   padding: 10px;\n"
+"}"));
+
+        gridLayout_2->addWidget(te_hosts, 2, 0, 1, 2);
+
+        label = new QLabel(centralwidget);
+        label->setObjectName(QString::fromUtf8("label"));
+        QFont font3;
+        font3.setBold(true);
+        font3.setItalic(true);
+        font3.setUnderline(true);
+        font3.setWeight(75);
+        label->setFont(font3);
+        label->setStyleSheet(QString::fromUtf8("QLabel{\n"
+"	color: black;\n"
+"   font-size: 30px;\n"
+"   margin-bottom: 20px;\n"
+"}"));
+        label->setAlignment(Qt::AlignCenter);
+
+        gridLayout_2->addWidget(label, 0, 2, 1, 1);
+
         tableWidget_Data = new QTableWidget(centralwidget);
         if (tableWidget_Data->columnCount() < 5)
             tableWidget_Data->setColumnCount(5);
@@ -97,16 +141,54 @@ public:
         __qtablewidgetitem4->setTextAlignment(Qt::AlignCenter);
         tableWidget_Data->setHorizontalHeaderItem(4, __qtablewidgetitem4);
         tableWidget_Data->setObjectName(QString::fromUtf8("tableWidget_Data"));
-        tableWidget_Data->setGeometry(QRect(10, 220, 1521, 441));
-        tableWidget_Data->horizontalHeader()->setDefaultSectionSize(310);
+        tableWidget_Data->setMaximumSize(QSize(10000000, 16777215));
+        QFont font4;
+        font4.setPointSize(11);
+        font4.setBold(false);
+        font4.setWeight(50);
+        tableWidget_Data->setFont(font4);
+        tableWidget_Data->setAutoFillBackground(false);
+        tableWidget_Data->setStyleSheet(QString::fromUtf8("QTableWidget\n"
+"{\n"
+"	color: green;\n"
+"	background-color: white;\n"
+"	margin:3px;\n"
+"	text-align:center;\n"
+"	border: 1px solid black;\n"
+"}"));
+        tableWidget_Data->setFrameShape(QFrame::StyledPanel);
+        tableWidget_Data->setFrameShadow(QFrame::Plain);
+        tableWidget_Data->setAutoScroll(true);
+        tableWidget_Data->setEditTriggers(QAbstractItemView::DoubleClicked);
+        tableWidget_Data->setDefaultDropAction(Qt::CopyAction);
+        tableWidget_Data->setHorizontalScrollMode(QAbstractItemView::ScrollPerItem);
+        tableWidget_Data->setGridStyle(Qt::CustomDashLine);
+        tableWidget_Data->horizontalHeader()->setVisible(true);
+        tableWidget_Data->horizontalHeader()->setCascadingSectionResizes(false);
+        tableWidget_Data->horizontalHeader()->setDefaultSectionSize(200);
+        tableWidget_Data->horizontalHeader()->setHighlightSections(true);
+        tableWidget_Data->verticalHeader()->setHighlightSections(false);
+
+        gridLayout_2->addWidget(tableWidget_Data, 1, 2, 3, 1);
+
         btn_reset = new QPushButton(centralwidget);
         btn_reset->setObjectName(QString::fromUtf8("btn_reset"));
-        btn_reset->setGeometry(QRect(930, 110, 151, 31));
         btn_reset->setFont(font1);
+        btn_reset->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"	background-color: blue;\n"
+"	color: white;\n"
+"    border-radius: 5px;\n"
+"	font-size: 17px;\n"
+"	padding: 5px;\n"
+"	margin: 5px;\n"
+"}"));
+
+        gridLayout_2->addWidget(btn_reset, 3, 1, 1, 1);
+
         App->setCentralWidget(centralwidget);
         menubar = new QMenuBar(App);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 1541, 22));
+        menubar->setGeometry(QRect(0, 0, 1250, 22));
         App->setMenuBar(menubar);
         statusbar = new QStatusBar(App);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -120,11 +202,11 @@ public:
     void retranslateUi(QMainWindow *App)
     {
         App->setWindowTitle(QApplication::translate("App", "App", nullptr));
-        label->setText(QApplication::translate("App", "VLSM CALCULATOR", nullptr));
         tf_networkAddress->setText(QString());
-        tf_networkAddress->setPlaceholderText(QApplication::translate("App", "Network Address ( for example : 192.168.1.0/24)", nullptr));
-        te_hosts->setPlaceholderText(QApplication::translate("App", "Enter title & number of host ( for example : marketing 43)", nullptr));
+        tf_networkAddress->setPlaceholderText(QApplication::translate("App", "Network Address(Ex : 192.168.1.0/24)", nullptr));
         btn_calculation->setText(QApplication::translate("App", "Calculate", nullptr));
+        te_hosts->setPlaceholderText(QApplication::translate("App", "Enter title & number of host ( for example : marketing 43)", nullptr));
+        label->setText(QApplication::translate("App", "VLSM CALCULATOR", nullptr));
         QTableWidgetItem *___qtablewidgetitem = tableWidget_Data->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("App", "Subnet Name", nullptr));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidget_Data->horizontalHeaderItem(1);
