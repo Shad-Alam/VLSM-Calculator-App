@@ -1,8 +1,8 @@
-### Project    : VLSM-Calculator-App
-### Language   : C, C++
-### Framework  : QT
-### Version    : 1.0.0.0
-### Contributor: Shad-Alam 
+#### Project    : VLSM-Calculator-App
+#### Language   : C, C++
+#### Framework  : QT
+#### Version    : 1.0.0.0
+#### Contributor: Shad-Alam 
 
 <br/>
 
