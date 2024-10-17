@@ -198,7 +198,7 @@ QPushButton:hover{
        <enum>Qt::CustomDashLine</enum>
       </property>
       <attribute name="horizontalHeaderVisible">
-       <bool>false</bool>
+       <bool>true</bool>
       </attribute>
       <attribute name="horizontalHeaderCascadingSectionResizes">
        <bool>false</bool>
@@ -275,34 +275,6 @@ QPushButton:hover{
       </property>
       <property name="placeholderText">
        <string>Enter title &amp; number of host ( for example : marketing 43)</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="1">
-     <widget class="QPushButton" name="btn_export_CSV_file">
-      <property name="styleSheet">
-       <string notr="true">QPushButton{
-	color: white;
-   background-color: #1d8348;
-   border-radius: 5px;
-	font-size: 17px;
-	padding: 5px;
-	margin-left: 5px;
-	margin-right: 5px;
-}
-
-QPushButton:hover{
-	color: white;
-   background-color: #3498db;
-   border-radius: 5px;
-	font-size: 17px;
-	padding: 5px;
-	margin-left: 5px;
-	margin-right: 5px;
-}</string>
-      </property>
-      <property name="text">
-       <string>PushButton</string>
       </property>
      </widget>
     </item>

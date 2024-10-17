@@ -36,7 +36,6 @@ public:
     QPushButton *btn_reset;
     QTableWidget *tableWidget_Data;
     QTextEdit *te_hosts;
-    QPushButton *btn_export_CSV_file;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -180,7 +179,7 @@ public:
         tableWidget_Data->setDefaultDropAction(Qt::CopyAction);
         tableWidget_Data->setHorizontalScrollMode(QAbstractItemView::ScrollPerItem);
         tableWidget_Data->setGridStyle(Qt::CustomDashLine);
-        tableWidget_Data->horizontalHeader()->setVisible(false);
+        tableWidget_Data->horizontalHeader()->setVisible(true);
         tableWidget_Data->horizontalHeader()->setCascadingSectionResizes(false);
         tableWidget_Data->horizontalHeader()->setDefaultSectionSize(200);
         tableWidget_Data->horizontalHeader()->setHighlightSections(true);
@@ -205,30 +204,6 @@ public:
 "}"));
 
         gridLayout_2->addWidget(te_hosts, 3, 0, 1, 2);
-
-        btn_export_CSV_file = new QPushButton(centralwidget);
-        btn_export_CSV_file->setObjectName(QString::fromUtf8("btn_export_CSV_file"));
-        btn_export_CSV_file->setStyleSheet(QString::fromUtf8("QPushButton{\n"
-"	color: white;\n"
-"   background-color: #1d8348;\n"
-"   border-radius: 5px;\n"
-"	font-size: 17px;\n"
-"	padding: 5px;\n"
-"	margin-left: 5px;\n"
-"	margin-right: 5px;\n"
-"}\n"
-"\n"
-"QPushButton:hover{\n"
-"	color: white;\n"
-"   background-color: #3498db;\n"
-"   border-radius: 5px;\n"
-"	font-size: 17px;\n"
-"	padding: 5px;\n"
-"	margin-left: 5px;\n"
-"	margin-right: 5px;\n"
-"}"));
-
-        gridLayout_2->addWidget(btn_export_CSV_file, 6, 1, 1, 1);
 
         App->setCentralWidget(centralwidget);
         menubar = new QMenuBar(App);
@@ -263,7 +238,6 @@ public:
         QTableWidgetItem *___qtablewidgetitem4 = tableWidget_Data->horizontalHeaderItem(4);
         ___qtablewidgetitem4->setText(QApplication::translate("App", "Broadcast Address", nullptr));
         te_hosts->setPlaceholderText(QApplication::translate("App", "Enter title & number of host ( for example : marketing 43)", nullptr));
-        btn_export_CSV_file->setText(QApplication::translate("App", "PushButton", nullptr));
     } // retranslateUi
 
 };

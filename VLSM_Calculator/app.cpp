@@ -297,38 +297,3 @@ void App::on_btn_reset_clicked()
     ui->tableWidget_Data->setRowCount(0);
     tableChecker = false;
 }
-/**
-std::cout << "Hello Dear...." << std::endl;
-QErrorMessage errorDialog(this); // constructor takes a parent widget
-errorDialog.showMessage("An error occurred");
-//    QMessageBox messageBox;
-//    messageBox.critical(0,"Error","An error has occured !");
-//    messageBox.setFixedSize(500,200);
-//    messageBox.exec();
-
-//    QErrorMessage errorDialog;
-//    errorDialog.showMessage("Error message");
-//    errorDialog.exec();
-if(tableChecker){
-    // export csv
-}else{
-//        QErrorMessage errorDialog;
-//        errorDialog.showMessage("Error message");
-//        errorDialog.exec();
-    // error message
-}
-*/
-
-void App::on_btn_export_CSV_file_clicked()
-{
-    ui->tf_networkAddress->setText("Shad Joy");
-
-    if(tableChecker){
-
-    }else{
-        // error message
-        QErrorMessage errorDialog(this);
-        errorDialog.showMessage("Error!!! Data Empty..");
-        errorDialog.exec();
-    }
-}

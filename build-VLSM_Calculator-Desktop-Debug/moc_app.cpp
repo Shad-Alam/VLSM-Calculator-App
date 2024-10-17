@@ -85,7 +85,6 @@ void App::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **
         switch (_id) {
         case 0: _t->on_btn_calculation_clicked(); break;
         case 1: _t->on_btn_reset_clicked(); break;
-        case 4: _t->on_btn_export_CSV_file_clicked(); break;
         default: ;
         }
     }
