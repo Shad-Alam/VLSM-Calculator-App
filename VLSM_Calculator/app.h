@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include <string>
-//#include <string.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class App; }
@@ -31,13 +30,9 @@ public:
 
 private slots:
     void on_btn_calculation_clicked();
-
     void on_btn_reset_clicked();
-
     void on_pushButton_clicked();
-
     void on_btn_export_csv_clicked();
-
     void on_btn_export_CSV_file_clicked();
 
 private:

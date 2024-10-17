@@ -1,11 +1,7 @@
 #include "app.h"
 #include "ui_app.h"
-#include "QVector"
-//#include "QString"
-//#include "string"
 #include "bits/stdc++.h"
 #include <QErrorMessage>
-#include <QMessageBox>
 
 #define pb  push_back
 
@@ -54,8 +50,6 @@ std::string App::getSubnetMask(int networkPortion){
     std::string subnetMask = "", sm = "";
 
     int n = networkPortion;
-
-    // error check n<0
 
     // 1st oct
     subnetMask+= getMask(n);
