@@ -4,6 +4,8 @@
 //#include "QString"
 //#include "string"
 #include "bits/stdc++.h"
+#include <QErrorMessage>
+#include <QMessageBox>
 
 #define pb  push_back
 
@@ -148,14 +150,8 @@ void App::on_btn_calculation_clicked()
     QString netaddress = ui->tf_networkAddress->text();
     QString hostList = ui->te_hosts->toPlainText();
     // Provide network address
-    std::string netadd = netaddress.toStdString();// "192.168.1.0/24";
+    std::string netadd = netaddress.toStdString(); // "192.168.1.0/24";
     std::string s = hostList.toStdString();
-
-    //netadd = "192.168.100.0/24";
-    //netadd = "10.0.0.0/8";
-
-    // seperate net address and find default subnetMask
-    // find which type of IP address this is
 
     std::vector<std::pair<std::string,int>> j;
 
@@ -272,8 +268,6 @@ void App::on_btn_calculation_clicked()
         netadd+="/" + std::to_string(s.networkPortion);
     }
 
-
-
     if(v.size()>0){
         tableChecker = true;
         ui->tableWidget_Data->setRowCount(v.size());
@@ -286,8 +280,11 @@ void App::on_btn_calculation_clicked()
             ui->tableWidget_Data->setItem(a, 4, new QTableWidgetItem(QString::fromStdString(v[a].second.second.second.second)));
         }
     }else{
-        tableChecker = false;
         // error message
+        QErrorMessage errorDialog(this);
+        errorDialog.showMessage("Error!!! Input Data Set Invalid..");
+        errorDialog.exec();
+        tableChecker = false;
     }
 }
 
@@ -300,13 +297,38 @@ void App::on_btn_reset_clicked()
     ui->tableWidget_Data->setRowCount(0);
     tableChecker = false;
 }
+/**
+std::cout << "Hello Dear...." << std::endl;
+QErrorMessage errorDialog(this); // constructor takes a parent widget
+errorDialog.showMessage("An error occurred");
+//    QMessageBox messageBox;
+//    messageBox.critical(0,"Error","An error has occured !");
+//    messageBox.setFixedSize(500,200);
+//    messageBox.exec();
 
+//    QErrorMessage errorDialog;
+//    errorDialog.showMessage("Error message");
+//    errorDialog.exec();
+if(tableChecker){
+    // export csv
+}else{
+//        QErrorMessage errorDialog;
+//        errorDialog.showMessage("Error message");
+//        errorDialog.exec();
+    // error message
+}
+*/
 
-void App::on_btn_export_csv_clicked()
+void App::on_btn_export_CSV_file_clicked()
 {
+    ui->tf_networkAddress->setText("Shad Joy");
+
     if(tableChecker){
-        // export csv
+
     }else{
         // error message
+        QErrorMessage errorDialog(this);
+        errorDialog.showMessage("Error!!! Data Empty..");
+        errorDialog.exec();
     }
 }

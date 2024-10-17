@@ -38,6 +38,8 @@ private slots:
 
     void on_btn_export_csv_clicked();
 
+    void on_btn_export_CSV_file_clicked();
+
 private:
     Ui::App *ui;
 
